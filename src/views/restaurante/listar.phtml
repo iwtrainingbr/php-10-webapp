@@ -1,0 +1,22 @@
+<h1>Lista de Restaurantes</h1>
+
+<table class="table table-striped table-hover mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Nome</th>
+            <th>Endereço</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            foreach ($restaurantes as $cada) {
+                echo "<tr>
+                    <td>{$cada['nome']}</td>
+                    <td>{$cada['endereco']}</td>
+                    <td>  </td>
+                </tr>";
+            }
+        ?>
+    </tbody>
+</table>
