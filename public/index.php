@@ -3,18 +3,21 @@
 ini_set('display_errors', 1);
 
 //route
-$url = $_SERVER['REQUEST_URI'];
+$url = explode('?', $_SERVER['REQUEST_URI'])[0];
 
 include '../src/Controller/AbstractController.php';
 include '../src/Controller/RestauranteController.php';
 include '../src/Controller/ProdutoController.php';
+include '../src/Controller/InicioController.php';
+include '../src/Connection/DefaultConnection.php';
 
 //router
 echo match($url) {
-    '/' => load('inicio'),
+    '/' => (new InicioController)->list(),
     '/restaurantes' => (new RestauranteController)->list(),
     '/restaurantes/novo' => (new RestauranteController)->add(), 
     '/produtos' => (new ProdutoController)->list(),
+    '/produtos/excluir' => (new ProdutoController)->remove(),
     '/contato' => load('contato'),
     default => load('erro'),
 };
