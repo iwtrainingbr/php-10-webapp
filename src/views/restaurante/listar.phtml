@@ -1,4 +1,6 @@
-<h1>Lista de Restaurantes</h1>
+<h1>Lista de Restaurantes (<?php echo Restaurante::count() ?>)</h1>
+
+<a href="/restaurantes/cadastro">Add Restaurante</a>
 
 <table class="table table-striped table-hover mt-3">
     <thead class="table-dark">
@@ -14,7 +16,9 @@
                 echo "<tr>
                     <td>{$cada['nome']}</td>
                     <td>{$cada['endereco']}</td>
-                    <td>  </td>
+                    <td>
+                        <a href='/restaurantes/excluir?id={$cada['id']}' class='btn btn-outline-danger'>Excluir</a>
+                    </td>
                 </tr>";
             }
         ?>

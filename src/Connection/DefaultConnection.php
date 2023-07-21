@@ -6,8 +6,8 @@ class DefaultConnection
 {
     //variaveis de ambiente
     public const HOST = 'localhost';
-    public const USER = 'alessandro';
-    public const PASS = 'livre';
+    public const USER = 'alessandro'; //root
+    public const PASS = 'livre'; // ''
     public const DB = 'db_ifood';
 
     public function abrir(): \PDO
@@ -22,4 +22,4 @@ class DefaultConnection
     }
 }
 
-
+// php -S localhost:8000 -t

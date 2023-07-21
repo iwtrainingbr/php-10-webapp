@@ -6,20 +6,29 @@ class RestauranteController extends AbstractController
 {
     public function list(): void
     {
-        //preparando a consulta
-        $resultado = $this->conexao()->prepare('SELECT * FROM tb_restaurante');
-
-        //executando a consulta
-        $resultado->execute();
-
-        //pegando os dados encontrados
-        $restaurantes = $resultado->fetchAll();
-
-        $this->load('restaurante/listar', $restaurantes);
+        $this->load('restaurante/listar', Restaurante::all()); 
     }
 
     public function add(): void
     {
-        echo "Pagina de cadastro ";
+        //se o form ja tiver sido preenchido
+        if (!empty($_POST)) {
+            $rest = new Restaurante();
+            $rest->nome = $_POST['nome'];
+            $rest->endereco = $_POST['endereco'];
+            
+            $rest->save();
+
+            header('location: /restaurantes');
+        }
+
+        $this->load('restaurante/add');
+    }
+
+    public function remove(): void
+    {
+        Restaurante::remove( (int) $_GET['id']);
+
+        header('location: /restaurantes');
     }
 }

@@ -8,8 +8,8 @@ class InicioController extends AbstractController
     {
         $dados = [
             'clientes' => 700,
-            'restaurantes' => 12,
-            'pedidos' => 70,
+            'restaurantes' => Restaurante::count(),
+            'produtos' => Produto::count(),
         ];
 
         $this->load('inicio/list', $dados);

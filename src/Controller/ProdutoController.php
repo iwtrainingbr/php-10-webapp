@@ -6,10 +6,7 @@ class ProdutoController extends AbstractController
 {
     public function list(): void
     {
-        $resultado = $this->conexao()->prepare('SELECT * FROM tb_produto');
-        $resultado->execute();
-
-        $this->load('produto/listar', $resultado->fetchAll());
+        $this->load('produto/listar', Produto::all());
     }
 
     public function add(): void
