@@ -14,6 +14,8 @@ include '../src/Model/AbstractModel.php';
 include '../src/Model/Produto.php';
 include '../src/Model/Restaurante.php';
 
+include '../src/Controller/Api/RestauranteApiController.php';
+
 //router
 echo match($url) {
     '/' => (new InicioController)->list(),
@@ -24,6 +26,12 @@ echo match($url) {
     '/produtos' => (new ProdutoController)->list(),
     '/produtos/excluir' => (new ProdutoController)->remove(),
     '/contato' => load('contato'),
+
+    //API
+    '/api/restaurantes' => (new RestauranteApiController)->getAll(),
+    '/api/restaurante' => (new RestauranteApiController)->getOne(),
+    '/api/restaurantes/add' => (new RestauranteApiController)->save(),
+
     default => load('erro'),
 };
 
