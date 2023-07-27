@@ -9,6 +9,21 @@ class RestauranteController extends AbstractController
         $this->load('restaurante/listar', Restaurante::all()); 
     }
 
+    public function edit(): void
+    {
+        $id = (int)$_GET['id'];
+
+        if (!empty($_POST)) {
+            Restaurante::update($id, $_POST['nome'], $_POST['endereco']);
+
+            header('location: /restaurantes');
+        }
+
+        $dados = Restaurante::findOne($id); 
+
+        $this->load('restaurante/edit', $dados);
+    }
+
     public function add(): void
     {
         //se o form ja tiver sido preenchido

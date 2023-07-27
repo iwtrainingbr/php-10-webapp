@@ -20,6 +20,7 @@ echo match($url) {
     '/restaurantes' => (new RestauranteController)->list(),
     '/restaurantes/cadastro' => (new RestauranteController)->add(), 
     '/restaurantes/excluir' => (new RestauranteController)->remove(),
+    '/restaurantes/editar' => (new RestauranteController)->edit(),
     '/produtos' => (new ProdutoController)->list(),
     '/produtos/excluir' => (new ProdutoController)->remove(),
     '/contato' => load('contato'),

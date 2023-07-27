@@ -24,6 +24,16 @@ abstract class AbstractModel
         return $resultado->fetchAll();
     }
 
+    public static function find(string $table, int $id): array
+    {
+        $con = (new DefaultConnection)->abrir();
+
+        $result = $con->prepare("SELECT * FROM {$table} WHERE id={$id}");
+        $result->execute();
+
+        return $result->fetch();
+    }
+
     public static function delete(string $table, int $id): void
     {
         $con = (new DefaultConnection)->abrir();

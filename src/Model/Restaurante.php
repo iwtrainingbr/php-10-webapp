@@ -19,6 +19,11 @@ class Restaurante extends AbstractModel
         return parent::select(self::TABLE);
     }
 
+    public static function findOne(int $id): array
+    {
+        return parent::find(self::TABLE, $id);
+    }
+
     public function save(): void
     {
         $con = (new DefaultConnection())->abrir();
@@ -26,6 +31,17 @@ class Restaurante extends AbstractModel
         $result = $con->prepare("
             INSERT INTO tb_restaurante (nome, endereco) 
             VALUES ('{$this->nome}', '{$this->endereco}')
+        ");
+        $result->execute();
+    }
+
+    public static function update(int $id, string $nome, string $endereco): void
+    {
+        $con = (new DefaultConnection())->abrir();
+
+        $result = $con->prepare("
+            UPDATE tb_restaurante SET nome='{$nome}', endereco='{$endereco}'
+            WHERE id={$id}
         ");
         $result->execute();
     }
