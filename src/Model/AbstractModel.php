@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+namespace App\Model;
+
+use App\Connection\DefaultConnection;
+
 abstract class AbstractModel
 {
     public static function qtd(string $table): int

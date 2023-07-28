@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+namespace App\Connection;
+
+use PDO;
+
 class DefaultConnection
 {
     //variaveis de ambiente
@@ -10,9 +14,9 @@ class DefaultConnection
     public const PASS = 'livre'; // ''
     public const DB = 'db_ifood';
 
-    public function abrir(): \PDO
+    public function abrir(): PDO
     {
-        $conexao = new \PDO(
+        $conexao = new PDO(
             'mysql:host=' . self::HOST . ';dbname=' . self::DB,
             self::USER,
             self::PASS

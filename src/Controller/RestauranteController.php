@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+namespace App\Controller;
+
+use App\Model\Restaurante;
+
 class RestauranteController extends AbstractController
 {
     public function list(): void
@@ -28,9 +32,10 @@ class RestauranteController extends AbstractController
     {
         //se o form ja tiver sido preenchido
         if (!empty($_POST)) {
-            $rest = new Restaurante();
-            $rest->nome = $_POST['nome'];
-            $rest->endereco = $_POST['endereco'];
+            $rest = new Restaurante(
+                $_POST['nome'],
+                $_POST['endereco']
+            );
             
             $rest->save();
 

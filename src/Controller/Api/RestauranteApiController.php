@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+namespace App\Controller\Api;
+
+use App\Model\Restaurante;
+
 class RestauranteApiController
 {
     public function getAll(): void
@@ -26,10 +30,11 @@ class RestauranteApiController
             file_get_contents('php://input')
         );
 
-        $novo = new Restaurante();
-        $novo->nome = $dados->nome;
-        $novo->endereco = $dados->endereco;
-
+        $novo = new Restaurante(
+            $dados->nome,
+            $dados->endereco
+        );
+        
         $novo->save();
 
         echo json_encode($dados);

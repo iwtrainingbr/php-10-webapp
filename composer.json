@@ -1,0 +1,16 @@
+{
+    "name": "alessandro/aula09",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alessandro Feitoza",
+            "email": "alessandrofeitoza01@gmail.com"
+        }
+    ],
+    "require": {
+    }
+}

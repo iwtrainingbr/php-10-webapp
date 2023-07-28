@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+namespace App\Controller;
+
+use App\Connection\DefaultConnection;
+
 abstract class AbstractController
 {
     public function load(string $view, array $dados = []): void
