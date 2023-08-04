@@ -8,9 +8,21 @@ use App\Controller\InicioController;
 use App\Controller\ProdutoController;
 use App\Controller\RestauranteController;
 use App\Controller\Api\RestauranteApiController;
+use App\Controller\AuthController;
+use App\Security\AuthSecurity;
+
+session_start();
 
 //route
 $url = explode('?', $_SERVER['REQUEST_URI'])[0];
+
+if (AuthSecurity::getUser() === null) {
+    echo match($url) {
+        default => (new AuthController)->login(),
+    };
+
+    exit;
+} 
 
 //router
 echo match($url) {
@@ -19,6 +31,10 @@ echo match($url) {
     '/restaurantes/cadastro' => (new RestauranteController)->add(), 
     '/restaurantes/excluir' => (new RestauranteController)->remove(),
     '/restaurantes/editar' => (new RestauranteController)->edit(),
+    '/restaurantes/pdf' => (new RestauranteController)->pdf(),
+
+    '/logout' => (new AuthController)->logout(),
+
     '/produtos' => (new ProdutoController)->list(),
     '/produtos/excluir' => (new ProdutoController)->remove(),
     '/contato' => load('contato'),

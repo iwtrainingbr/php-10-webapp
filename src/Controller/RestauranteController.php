@@ -5,9 +5,57 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Model\Restaurante;
+use Dompdf\Dompdf;
 
 class RestauranteController extends AbstractController
 {
+    public function pdf(): void
+    {
+        $dados = "";
+
+        $todos = Restaurante::all(); //[A, B, C, D, E]
+        foreach ($todos as $cada) {
+            $dados .= "
+                <tr>
+                    <td>{$cada['id']}</td>
+                    <td>{$cada['nome']}</td>
+                    <td>{$cada['endereco']}</td>
+                </tr>
+            ";  
+        }
+
+        $pdf = new Dompdf();
+        $pdf->loadHtml("
+            <style>
+                .table-dark {
+                    background-color: #333333;
+                    color: #FFFFFF;
+                }
+            </style>
+
+            <h1>Lista de Restaurantes: " . Restaurante::count() . " </h1>
+
+            <table class='table table-striped table-hover mt-3'>
+                <thead class='table-dark'>
+                    <tr>
+                        <th>#ID</th>
+                        <th>Nome</th>
+                        <th>Endereço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {$dados}
+                </tbody>
+            </table>
+        ");
+
+        $pdf->render();
+
+        $pdf->stream('restaurantes.pdf', [
+            'Attachment' => false,
+        ]);
+    }
+
     public function list(): void
     {
         $this->load('restaurante/listar', Restaurante::all()); 
