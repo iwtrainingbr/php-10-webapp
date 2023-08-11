@@ -9,9 +9,13 @@ use App\Controller\ProdutoController;
 use App\Controller\RestauranteController;
 use App\Controller\Api\RestauranteApiController;
 use App\Controller\AuthController;
+use App\Controller\UsuarioController;
 use App\Security\AuthSecurity;
 
+
 session_start();
+
+date_default_timezone_set('America/Fortaleza');
 
 //route
 $url = explode('?', $_SERVER['REQUEST_URI'])[0];
@@ -32,6 +36,9 @@ echo match($url) {
     '/restaurantes/excluir' => (new RestauranteController)->remove(),
     '/restaurantes/editar' => (new RestauranteController)->edit(),
     '/restaurantes/pdf' => (new RestauranteController)->pdf(),
+
+    '/usuarios' => (new UsuarioController)->list(),
+    '/usuarios/cadastro' => (new UsuarioController)->add(),
 
     '/logout' => (new AuthController)->logout(),
 

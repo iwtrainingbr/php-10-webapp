@@ -25,3 +25,16 @@ INSERT INTO tb_produto (nome, valor, quantidade) VALUES ('Cuscuz', 5.89, 20);
 INSERT INTO tb_produto (nome, valor, quantidade) VALUES ('Ypioca', 5.89, 20);
 INSERT INTO tb_produto (nome, valor, quantidade) VALUES ('Heineken', 6.90, 20);
 INSERT INTO tb_produto (nome, valor, quantidade) VALUES ('Feijão', 10.12, 20);
+
+
+USE db_ifood;
+
+CREATE TABLE tb_usuario (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    criado_em DATETIME NOT NULL,
+    editado_em DATETIME,
+    ultimo_login DATETIME
+);

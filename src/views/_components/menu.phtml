@@ -1,10 +1,18 @@
-<nav class="mb-3">
-    <a class="btn btn-outline-dark" href="/">Inicio</a>
-    <a class="btn btn-outline-dark" href="/restaurantes">Restaurantes</a>
-    <a class="btn btn-outline-dark" href="/produtos">Produtos</a>
-    <a class="btn btn-outline-dark" href="/contato">Contato</a>
-    <a class="btn btn-outline-dark" href="/admin">Admin</a>
+<nav class="mb-3 d-flex justify-content-between">
+    <div>
+        <a class="btn btn-outline-dark" href="/">Inicio</a>
+        <a class="btn btn-outline-dark" href="/restaurantes">Restaurantes</a>
+        <a class="btn btn-outline-dark" href="/produtos">Produtos</a>
+        <a class="btn btn-outline-dark" href="/contato">Contato</a>
+        <a class="btn btn-outline-dark" href="/admin">Admin</a>
 
-    <a class="btn btn-outline-danger" href="/logout">Sair</a>
+        <a class="btn btn-outline-dark" href="/usuarios">Usuários</a>
+
+        <a class="btn btn-outline-danger" href="/logout">Sair</a>
+    </div>
+    
+    <div>
+        <?= App\Security\AuthSecurity::getUser()['name'] ?>
+    </div>
 </nav>
 

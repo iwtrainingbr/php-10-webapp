@@ -1,0 +1,33 @@
+<h1>Lista de Usuarios</h1>
+
+<a href="/usuarios/cadastro">Add Usuario</a>
+
+<table class="table table-striped table-hover mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Criado em</th>
+            <th>Ultimo login</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            foreach ($dados as $cada) {
+                $ultimoLogin = $cada['ultimo_login'] ?? '<span class="badge bg-danger">Nunca logou</span>';
+
+                echo "<tr>
+                    <td>{$cada['nome']}</td>
+                    <td>{$cada['email']}</td>
+                    <td>{$cada['criado_em']}</td>
+                    <td>{$ultimoLogin}</td>
+                    <td>
+                        <a href='/usuarios/excluir?id={$cada['id']}' class='btn btn-outline-danger'>Excluir</a>
+                        <a href='/usuarios/editar?id={$cada['id']}' class='btn btn-outline-warning'>Editar</a>
+                    </td>
+                </tr>";
+            }
+        ?>
+    </tbody>
+</table>

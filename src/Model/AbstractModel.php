@@ -5,14 +5,18 @@ declare(strict_types=1);
 namespace App\Model;
 
 use App\Connection\DefaultConnection;
+use PDO;
 
 abstract class AbstractModel
 {
+    public static function db(): PDO
+    {
+        return (new DefaultConnection)->abrir();
+    }
+
     public static function qtd(string $table): int
     {
-        $con = (new DefaultConnection)->abrir();
-
-        $resultado = $con->prepare("SELECT COUNT(*) AS qtd FROM {$table}");
+        $resultado = self::db()->prepare("SELECT COUNT(*) AS qtd FROM {$table}");
         $resultado->execute();
 
         return $resultado->fetch()['qtd'];
@@ -20,9 +24,7 @@ abstract class AbstractModel
 
     public static function select(string $table): array
     {
-        $con = (new DefaultConnection)->abrir();
-
-        $resultado = $con->prepare("SELECT * FROM {$table}");
+        $resultado = self::db()->prepare("SELECT * FROM {$table}");
         $resultado->execute();
 
         return $resultado->fetchAll();
